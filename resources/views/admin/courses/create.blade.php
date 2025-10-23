@@ -19,38 +19,43 @@
                     <div class="space-y-4">
                         <div>
                             <label class="block text-sm font-medium text-gray-700">Title</label>
-                            <input type="text" name="title" class="mt-1 block w-full border border-amber-100 bg-white rounded-lg p-3 shadow-sm" required>
+                            <input type="text" name="title" class="mt-1 block w-full border border-sky-500 bg-white rounded-lg p-3 shadow-sm" required>
                         </div>
 
                         <div>
                             <label class="block text-sm font-medium text-gray-700">Description</label>
-                            <textarea name="description" class="mt-1 block w-full border border-amber-100 bg-white rounded-lg p-3 shadow-sm" rows="4" required></textarea>
+                            <textarea name="description" class="mt-1 block w-full border border-sky-500 bg-white rounded-lg p-3 shadow-sm" rows="4" required></textarea>
                         </div>
 
-                        <div>
-                            <label class="block text-sm font-medium text-gray-700">Level</label>
-                            <input type="text" name="level" class="mt-1 block w-full border border-amber-100 bg-white rounded-lg p-3 shadow-sm" placeholder="Beginner / Intermediate / Advanced" required>
+                        <div class="mb-3">
+                            <label class="block font-semibold text-gray-700">Level</label>
+                            <select name="level" class="border rounded w-full p-2 bg-white" required>
+                                <option value="">Choose Level</option>
+                                <option value="Beginner">Beginner</option>
+                                <option value="Intermediate">Intermediate</option>
+                                <option value="Advanced">Advanced</option>
+                            </select>
                         </div>
 
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                             <div>
                                 <label class="block text-sm font-medium text-gray-700">Start Time</label>
-                                <input type="datetime-local" name="start_time" class="mt-1 block w-full border border-amber-100 bg-white rounded-lg p-3 shadow-sm" required>
+                                <input type="datetime-local" name="start_time" class="mt-1 block w-full border border-sky-500 bg-white rounded-lg p-3 shadow-sm" required>
                             </div>
                             <div>
                                 <label class="block text-sm font-medium text-gray-700">End Time</label>
-                                <input type="datetime-local" name="end_time" class="mt-1 block w-full border border-amber-100 bg-white rounded-lg p-3 shadow-sm" required>
+                                <input type="datetime-local" name="end_time" class="mt-1 block w-full border border-sky-500 bg-white rounded-lg p-3 shadow-sm" required>
                             </div>
                         </div>
 
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                             <div>
                                 <label class="block text-sm font-medium text-gray-700">Quota</label>
-                                <input type="number" name="quota" class="mt-1 block w-full border border-amber-100 bg-white rounded-lg p-3 shadow-sm" required>
+                                <input type="number" name="quota" class="mt-1 block w-full border border-sky-500 bg-white rounded-lg p-3 shadow-sm" required>
                             </div>
                             <div>
                                 <label class="block text-sm font-medium text-gray-700">Coach Name</label>
-                                <input type="text" name="coach_name" class="mt-1 block w-full border border-amber-100 bg-white rounded-lg p-3 shadow-sm" required>
+                                <input type="text" name="coach_name" class="mt-1 block w-full border border-sky-500 bg-white rounded-lg p-3 shadow-sm" required>
                             </div>
                         </div>
 

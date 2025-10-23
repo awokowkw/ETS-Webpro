@@ -26,29 +26,19 @@
 
 <body class="antialiased text-white font-sans relative">
 
-    {{-- 🔹 Background Video Placeholder --}}
     <div class="absolute inset-0 -z-10 overflow-hidden">
         <video autoplay muted loop playsinline class="w-full h-full object-cover"> 
-            <source src="{{ asset('video/BG_Video.mp4') }}" type="video/mp4">
-            <!-- Placeholder image if video fails -->
+            <source src="{{ asset('video/BG-Video.mp4') }}" type="video/mp4">
             <img src="{{ asset('image/BG_Welcome.jpg') }}" alt="Chess Academy Background" class="w-full h-full object-cover">
         </video>
         <div class="absolute inset-0 overlay"></div>
     </div>
 
-    {{-- 🔹 Navbar --}} 
     <header class="flex justify-between items-center px-10 py-6 absolute top-0 w-full z-20">
         <div class="flex items-center gap-3">
             <img src="{{ asset('image/logo.png') }}" alt="Logo" class="w-20 h-20">
             <h1 class="text-2xl font-bold tracking-wide">ChessCourse</h1>
         </div>
-
-        <nav class="hidden md:flex gap-8 text-lg">
-            <a href="#" class="hover:text-[#ADD8E6] transition">Home</a>
-            <a href="#" class="hover:text-[#ADD8E6] transition">Programs</a>
-            <a href="#" class="hover:text-[#ADD8E6] transition">News</a>
-            <a href="#" class="hover:text-[#ADD8E6] transition">About</a>
-        </nav>
 
         <div>
             <a href="{{ route('login') }}" 

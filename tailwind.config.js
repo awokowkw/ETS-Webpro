@@ -18,4 +18,12 @@ export default {
     },
 
     plugins: [forms],
+    
+    theme: {
+        extend: {
+            spacing: {
+            '30': '30px'
+            }
+        }
+    }
 };

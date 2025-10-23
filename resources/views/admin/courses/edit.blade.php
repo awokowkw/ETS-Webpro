@@ -34,11 +34,15 @@
                     </div>
 
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                        <div>
-                            <label class="block text-sm font-medium text-gray-700">Level</label>
-                            <input type="text" name="level" value="{{ old('level', $course->level) }}" required
-                                class="mt-1 block w-full border border-amber-100 bg-white rounded-lg p-3 shadow-sm" />
+                        <div class="mb-3">
+                            <label class="block font-semibold text-gray-700">Level</label>
+                            <select name="level" class="border rounded w-full p-2 bg-white" required>
+                                <option value="Beginner" {{ $course->level == 'Beginner' ? 'selected' : '' }}>Beginner</option>
+                                <option value="Intermediate" {{ $course->level == 'Intermediate' ? 'selected' : '' }}>Intermediate</option>
+                                <option value="Advanced" {{ $course->level == 'Advanced' ? 'selected' : '' }}>Advanced</option>
+                            </select>
                         </div>
+
 
                         <div>
                             <label class="block text-sm font-medium text-gray-700">Coach Name</label>

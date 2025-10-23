@@ -4,15 +4,28 @@
             <div class="flex">
 
                 <div class="shrink-0 flex items-center">
-                    <a href="{{ route('dashboard') }}">
-                        <img src="{{ asset('image/logo.png') }}" alt="Logo" class="h-9 w-auto" />
-                    </a>
+                    <img src="{{ asset('image/logo.png') }}" alt="Logo" class="h-11 w-auto" />
                 </div>
 
-                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                    <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
+                <div class="hidden sm:flex sm:items-center sm:-my-px sm:ms-10 sm:space-x-30">
+                    <x-nav-link :href="auth()->user()->is_admin ? route('admin.dashboard') : route('user.dashboard')" 
+                        :active="request()->routeIs('admin.dashboard') || request()->routeIs('user.dashboard')">
                         {{ __('Dashboard') }}
                     </x-nav-link>
+
+                    @if(auth()->user()->is_admin)
+                        <x-nav-link 
+                            :href="route('admin.news.index')" 
+                            :active="request()->routeIs('admin.news.*')">
+                            {{ __('Manage News') }}
+                        </x-nav-link>
+                    @else
+                        <x-nav-link 
+                            :href="route('user.news.index')" 
+                            :active="request()->routeIs('user.news.*')">
+                            {{ __('News') }}
+                        </x-nav-link>
+                    @endif
                 </div>
             </div>
 

@@ -1,17 +1,21 @@
 <?php
 
-use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\CourseController;
+use App\Http\Controllers\NewsController;
+use App\Http\Controllers\UserCourseController;
+use App\Http\Controllers\UserNewsController;
+
 
 Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/dashboard', [DashboardController::class, 'index'])
-    ->middleware(['auth', 'verified'])
-    ->name('dashboard');
+Route::get('/redirect', function () {
+    return redirect()->route('login');
+})->name('redirect.login');
 
 
 Route::middleware('auth')->group(function () {
@@ -20,26 +24,37 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-Route::middleware(['auth', 'verified'])->prefix('admin')->name('admin.')->group(function () {
-    Route::get('/dashboard', function () {
-        return view('admin.dashboard');
-    })->name('dashboard');
+Route::get('/dashboard', function () {
+    $user = auth()->user();
 
-    // CRUD
-    Route::get('/courses', [CourseController::class, 'index'])->name('courses.index');
-    Route::get('/courses/create', [CourseController::class, 'create'])->name('courses.create');
-    Route::post('/courses', [CourseController::class, 'store'])->name('courses.store');
-    Route::get('/courses/{id}/edit', [CourseController::class, 'edit'])->name('courses.edit');
-    Route::put('/courses/{id}', [CourseController::class, 'update'])->name('courses.update');
-    Route::delete('/courses/{id}', [CourseController::class, 'destroy'])->name('courses.destroy');
+    if ($user->is_admin) {
+        return redirect()->route('admin.dashboard');
+    }
+    return redirect()->route('user.dashboard');
+})->middleware(['auth', 'verified'])->name('dashboard');
 
-});
+Route::middleware(['auth', 'verified'])
+    ->prefix('admin')
+    ->name('admin.')
+    ->group(function () {
 
-Route::middleware(['auth', 'verified'])->prefix('user')->name('user.')->group(function () {
-    Route::get('/dashboard', function () {
-        return view('user.dashboard');
-    })->name('dashboard');
+        Route::get('/dashboard', function () {
+            return view('admin.dashboard');
+        })->name('dashboard');
 
-});
+        Route::resource('courses', CourseController::class);
+        Route::resource('news', NewsController::class);
+    });
+
+Route::middleware(['auth','verified'])
+    ->prefix('user')
+    ->name('user.')
+    ->group(function () {
+        Route::get('/dashboard', [UserCourseController::class, 'index'])->name('dashboard');
+        Route::post('/enroll/{course}', [UserCourseController::class, 'enroll'])->name('enroll');
+        Route::delete('/leave/{course}', [UserCourseController::class, 'leave'])->name('leave');
+        Route::get('/news', [UserNewsController::class, 'index'])->name('news.index');
+        Route::get('/news/{id}', [UserNewsController::class, 'show'])->name('news.show');
+    });
 
 require __DIR__.'/auth.php';
